@@ -31,8 +31,20 @@ class RecipeController {
     @PostMapping("/recipes")
     @ResponseBody
     fun uploadRecipe(@RequestParam("file") file: MultipartFile): Recipe {
-        val content = file.inputStream.bufferedReader().use { it.readText() }
         val name = file.originalFilename?.substringBeforeLast(".") ?: "Unknown Recipe"
+        val content = when (file.contentType) {
+            "text/plain" -> {
+                file.inputStream.bufferedReader().use { it.readText() }
+            }
+
+            "image/jpeg", "image/png" -> {
+                "Uploaded a graphical file: ${file.originalFilename}"
+            }
+
+            else -> {
+                throw RuntimeException("Unsupported file type: ${file.contentType}")
+            }
+        }
         val recipe = Recipe(name, content)
         recipes[recipe.id] = recipe
         return recipe
