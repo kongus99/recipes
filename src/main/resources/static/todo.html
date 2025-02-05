@@ -12,60 +12,31 @@
 <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
     <h1 class="text-2xl font-bold mb-4 text-center">TODO App</h1>
 
-    <!-- Form to add a new task -->
+    <!-- Form to Add New TODO -->
     <form
             hx-post="/todos"
             hx-swap="beforeend"
             hx-target="#todo-list"
             class="mb-4 flex gap-2"
     >
-        <input
-                type="text"
-                name="title"
-                placeholder="Add a new TODO..."
-                class="flex-1 border-gray-300 p-2 border rounded"
-                required
-        />
+        <label>
+            <input
+                    type="text"
+                    name="title"
+                    placeholder="Add a new TODO..."
+                    class="flex-1 border-gray-300 p-2 border rounded"
+                    required
+            />
+        </label>
         <button class="bg-blue-500 text-white px-4 py-2 rounded shadow hover:bg-blue-600">
             Add
         </button>
     </form>
 
-    <!-- TODO list -->
-    <ul id="todo-list" class="space-y-2">
-        <!-- HTMx dynamically updates this list -->
-        <!-- Example list item (will be added dynamically)
-        <li class="flex items-center justify-between p-2 border rounded bg-gray-50">
-            <span class="flex items-center gap-2">
-                <input type="checkbox" class="form-checkbox h-4 w-4">
-                <span>Sample TODO</span>
-            </span>
-            <button class="text-red-500 hover:text-red-600">Delete</button>
-        </li>
-        -->
+    <!-- TODO List -->
+    <ul id="todo-list" class="space-y-2" hx-get="/todos" hx-trigger="load">
+        <!-- Items will be dynamically populated by HTMx -->
     </ul>
 </div>
-
-<template id="todo-template">
-    <li class="flex items-center justify-between p-2 border rounded bg-gray-50">
-            <span class="flex items-center gap-2">
-                <input
-                        type="checkbox"
-                        class="form-checkbox h-4 w-4"
-                        hx-post="/todos/{id}/toggle"
-                        hx-swap="outerHTML"
-                >
-                <span>{title}</span>
-            </span>
-        <button
-                class="text-red-500 hover:text-red-600"
-                hx-delete="/todos/{id}"
-                hx-swap="outerHTML"
-        >
-            Delete
-        </button>
-    </li>
-</template>
-
 </body>
 </html>
