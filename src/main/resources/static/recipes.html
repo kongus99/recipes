@@ -3,27 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TODO App</title>
+    <title>Recipes App</title>
     <script src="https://unpkg.com/htmx.org"></script>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="h-full bg-gray-100 flex items-center justify-center">
 
 <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
-    <h1 class="text-2xl font-bold mb-4 text-center">TODO App</h1>
+    <h1 class="text-2xl font-bold mb-4 text-center">Recipes App</h1>
 
-    <!-- Form to Add New TODO -->
     <form
-            hx-post="/todos"
+            hx-post="/recipes"
             hx-swap="beforeend"
-            hx-target="#todo-list"
+            hx-target="#recipes-list"
             class="mb-4 flex gap-2"
     >
         <label>
             <input
                     type="text"
                     name="title"
-                    placeholder="Add a new TODO..."
+                    placeholder="Add a new recipe..."
                     class="flex-1 border-gray-300 p-2 border rounded"
                     required
             />
@@ -33,9 +32,7 @@
         </button>
     </form>
 
-    <!-- TODO List -->
-    <ul id="todo-list" class="space-y-2" hx-get="/todos" hx-trigger="load">
-        <!-- Items will be dynamically populated by HTMx -->
+    <ul id="recipes-list" class="space-y-2" hx-get="/recipes" hx-trigger="load">
     </ul>
 </div>
 </body>
