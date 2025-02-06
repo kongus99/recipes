@@ -11,29 +11,8 @@
 
 <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
     <h1 class="text-2xl font-bold mb-4 text-center">Recipes App</h1>
-
-    <form
-            hx-post="/recipes"
-            hx-swap="beforeend"
-            hx-target="#recipes-list"
-            class="mb-4 flex gap-2"
-    >
-        <label>
-            <input
-                    type="text"
-                    name="title"
-                    placeholder="Add a new recipe..."
-                    class="flex-1 border-gray-300 p-2 border rounded"
-                    required
-            />
-        </label>
-        <button class="bg-blue-500 text-white px-4 py-2 rounded shadow hover:bg-blue-600">
-            Add
-        </button>
-    </form>
-
-    <ul id="recipes-list" class="space-y-2" hx-get="/recipes" hx-trigger="load">
-    </ul>
+    <div id="main-container" hx-get="/mainContainer" hx-trigger="load" hx-swap="innerHTML">
+    </div>
 </div>
 </body>
 </html>
