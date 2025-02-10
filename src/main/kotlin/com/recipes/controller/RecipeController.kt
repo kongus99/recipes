@@ -8,6 +8,7 @@ import gg.jte.TemplateOutput
 import gg.jte.output.StringOutput
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.*
+import org.springframework.web.multipart.MultipartFile
 import java.util.*
 import java.util.concurrent.ConcurrentHashMap
 
@@ -40,8 +41,19 @@ class RecipeController(private val engine: TemplateEngine) {
 
     @PostMapping("/recipes")
     @ResponseBody
-    fun create(@RequestParam("title") title: String): String {
+    fun create(@RequestParam("title") title: String, @RequestParam("file") file: MultipartFile?): String {
         val recipe = Recipe(title)
+
+        if (file != null && !file.isEmpty) {
+            val contentType = file.contentType
+
+            if (contentType == "image/png" || contentType == "image/jpeg") {
+                val base64EncodedImage = Base64.getEncoder().encodeToString(file.bytes)
+                recipe.content = base64EncodedImage
+            } else {
+                throw IllegalArgumentException("Unsupported file type. Only PNG and JPEG formats are allowed.")
+            }
+        }
         recipes[recipe.id] = recipe
         return container(Default)
     }
