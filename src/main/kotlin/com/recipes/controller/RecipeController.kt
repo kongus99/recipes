@@ -2,6 +2,7 @@ package com.recipes.controller
 
 import com.recipes.controller.RenderTarget.Adding
 import com.recipes.controller.RenderTarget.Default
+import com.recipes.model.Content.Companion.fromMultipartFile
 import com.recipes.model.Recipe
 import gg.jte.TemplateEngine
 import gg.jte.TemplateOutput
@@ -42,18 +43,7 @@ class RecipeController(private val engine: TemplateEngine) {
     @PostMapping("/recipes")
     @ResponseBody
     fun create(@RequestParam("title") title: String, @RequestParam("file") file: MultipartFile?): String {
-        val recipe = Recipe(title)
-
-        if (file != null && !file.isEmpty) {
-            val contentType = file.contentType
-
-            if (contentType == "image/png" || contentType == "image/jpeg") {
-                val base64EncodedImage = Base64.getEncoder().encodeToString(file.bytes)
-                recipe.content = base64EncodedImage
-            } else {
-                throw IllegalArgumentException("Unsupported file type. Only PNG and JPEG formats are allowed.")
-            }
-        }
+        val recipe = Recipe(title, fromMultipartFile(file))
         recipes[recipe.id] = recipe
         return container(Default)
     }
