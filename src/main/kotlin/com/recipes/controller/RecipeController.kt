@@ -38,7 +38,7 @@ class RecipeController(private val engine: TemplateEngine) {
     @GetMapping("/recipes")
     @ResponseBody
     fun getRecipes(): String {
-        return recipes.values.joinToString("\n") { it.toListEntry() }
+        return recipes.values.joinToString("\n") { render("recipeEntry", mapOf("recipe" to it)) }
     }
 
     @PostMapping("/recipes")
@@ -54,10 +54,6 @@ class RecipeController(private val engine: TemplateEngine) {
     fun getRecipeSummary(@PathVariable id: UUID): String {
         val recipe = recipes[id] ?: throw IllegalArgumentException("Recipe not found")
         return render("recipeSummary", mapOf("recipe" to recipe))
-    }
-
-    fun Recipe.toListEntry(): String {
-        return render("recipeEntry", mapOf("recipe" to this))
     }
 
     private fun render(
