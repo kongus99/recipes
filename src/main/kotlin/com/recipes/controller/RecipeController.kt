@@ -28,9 +28,10 @@ class RecipeController(private val engine: TemplateEngine) {
     fun container(@RequestParam("render") render: RenderTarget?): String {
         return when (render) {
             Adding -> {
-                render("recipeAddForm.jte")
+                render("recipeAddForm")
             }
-            else -> render("recipeAddButton.jte") + render("recipeList.jte")
+
+            else -> render("recipeAddButton") + render("recipeList")
         }
     }
 
@@ -52,7 +53,7 @@ class RecipeController(private val engine: TemplateEngine) {
     @ResponseBody
     fun getRecipeSummary(@PathVariable id: UUID): String {
         val recipe = recipes[id] ?: throw IllegalArgumentException("Recipe not found")
-        return render("recipeSummary.jte", mapOf("recipe" to recipe))
+        return render("recipeSummary", mapOf("recipe" to recipe))
     }
 
     @PostMapping("/recipes/{id}/toggle")
@@ -64,7 +65,7 @@ class RecipeController(private val engine: TemplateEngine) {
     }
 
     fun Recipe.toListEntry(): String {
-        return render("recipeEntry.jte", mapOf("recipe" to this))
+        return render("recipeEntry", mapOf("recipe" to this))
     }
 
     private fun render(
@@ -72,9 +73,10 @@ class RecipeController(private val engine: TemplateEngine) {
         params: Map<String, Any> = mapOf(),
         output: TemplateOutput = StringOutput()
     ): String {
-        engine.render(template, params, output)
+        engine.render("$template.kte", params, output) // Changed file extension to .kte
         return output.toString()
     }
+
 }
 
 enum class RenderTarget {

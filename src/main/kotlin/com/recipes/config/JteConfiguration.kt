@@ -11,8 +11,8 @@ class JteConfiguration {
     @Bean
     fun templateEngine(): TemplateEngine {
         return TemplateEngine.create(
-            ResourceCodeResolver("templates"), 
+            ResourceCodeResolver("templates"),
             ContentType.Plain
-        )
+        ).apply { setTrimControlStructures(true) }
     }
 }
