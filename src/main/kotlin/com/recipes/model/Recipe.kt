@@ -9,10 +9,9 @@ data class Recipe(
     var title: String,
     var content: Content,
     val id: UUID = randomUUID(),
-    var completed: Boolean = false,
 )
 
-data class Content(val content: String = "No content", val contentType: ContentType = TEXT) {
+data class Content(val original: String = "No content", val type: ContentType = TEXT) {
 
     companion object {
         fun fromMultipartFile(file: MultipartFile?): Content {

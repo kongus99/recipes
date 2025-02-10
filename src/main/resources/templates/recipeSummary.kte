@@ -8,10 +8,10 @@
     <h2 class="font-bold text-xl mb-4">${recipe.title}</h2>
 
     <div class="recipe-content mb-4">
-        @if(recipe.content.contentType == ContentType.TEXT)
-            <p>${recipe.content.content}</p>
+        @if(recipe.content.type == ContentType.TEXT)
+            <p>${recipe.content.original}</p>
         @else
-            <img src="data:${recipe.content.content};base64,${recipe.content.content}"
+            <img src="data:${recipe.content.original};base64,${recipe.content.original}"
                  alt="${recipe.title}"
                  class="rounded-md shadow"/>
         @endif
