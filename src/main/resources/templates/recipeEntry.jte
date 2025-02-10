@@ -2,13 +2,7 @@
 
 @param Recipe recipe
 
-!{var backgroundClass = recipe.getCompleted() ? "bg-green-500" : "bg-red-500";}
-
-<li
-        class="recipe-item mt-2 p-4 text-white font-medium rounded shadow ${backgroundClass} "
-        hx-post="/recipes/${recipe.getId().toString()}/toggle"
-        hx-swap="outerHTML"
-        hx-trigger="click"
->
-    ${recipe.getTitle()}
-</li>
+<div class="recipe-entry p-4 border rounded mb-2 cursor-pointer"
+     hx-get="/recipes/${recipe.getId().toString()}" hx-trigger="click" hx-target="#main-container" hx-swap="innerHTML">
+    <h2 class="font-bold text-lg">${recipe.getTitle()}</h2>
+</div>

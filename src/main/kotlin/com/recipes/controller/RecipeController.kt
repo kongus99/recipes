@@ -48,6 +48,13 @@ class RecipeController(private val engine: TemplateEngine) {
         return container(Default)
     }
 
+    @GetMapping("/recipes/{id}")
+    @ResponseBody
+    fun getRecipeSummary(@PathVariable id: UUID): String {
+        val recipe = recipes[id] ?: throw IllegalArgumentException("Recipe not found")
+        return render("recipeSummary.jte", mapOf("recipe" to recipe))
+    }
+
     @PostMapping("/recipes/{id}/toggle")
     @ResponseBody
     fun toggle(@PathVariable id: UUID): String {
