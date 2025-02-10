@@ -31,7 +31,7 @@ class RecipeController(private val engine: TemplateEngine) {
                 render("recipeAddForm")
             }
 
-            else -> render("recipeAddButton") + render("recipeList")
+            else -> render("recipeList")
         }
     }
 
@@ -56,14 +56,6 @@ class RecipeController(private val engine: TemplateEngine) {
         return render("recipeSummary", mapOf("recipe" to recipe))
     }
 
-    @PostMapping("/recipes/{id}/toggle")
-    @ResponseBody
-    fun toggle(@PathVariable id: UUID): String {
-        val recipe = recipes[id] ?: throw IllegalArgumentException("Entry not found")
-        recipe.completed = !recipe.completed
-        return recipe.toListEntry()
-    }
-
     fun Recipe.toListEntry(): String {
         return render("recipeEntry", mapOf("recipe" to this))
     }
@@ -73,7 +65,7 @@ class RecipeController(private val engine: TemplateEngine) {
         params: Map<String, Any> = mapOf(),
         output: TemplateOutput = StringOutput()
     ): String {
-        engine.render("$template.kte", params, output) // Changed file extension to .kte
+        engine.render("$template.kte", params, output)
         return output.toString()
     }
 

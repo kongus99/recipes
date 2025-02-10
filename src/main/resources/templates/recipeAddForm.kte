@@ -11,7 +11,7 @@
     </div>
     <div class="mt-4">
         <label for="file" class="block text-sm font-medium text-gray-700">Upload Image</label>
-        <input type="file" id="file" name="file" accept="image/png, image/jpeg" class="mt-1 block w-full">
+        <input type="file" id="file" name="file" class="mt-1 block w-full">
     </div>
 
 
