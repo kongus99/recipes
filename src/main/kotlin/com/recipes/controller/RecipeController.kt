@@ -52,5 +52,10 @@ class RecipeController(private val engine: TemplateEngine) {
         return output.toString()
     }
 
+    @GetMapping("/recipes/add")
+    @ResponseBody
+    fun modal(): String {
+        return render("recipeAdd")
+    }
 }
 
