@@ -2,6 +2,7 @@
 
 @param recipe: Recipe
 
-<li class="list-group-item text-center fw-bold py-3">
-    <a class="text-decoration-none" href="#">${recipe.title}</a>
-</li>
+<a href="#" class="list-group-item text-center fw-bold py-3" hx-get="/recipes/${recipe.id.toString()}"
+   hx-trigger="click">
+    ${recipe.title}
+</a>

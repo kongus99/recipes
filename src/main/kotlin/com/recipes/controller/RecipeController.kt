@@ -25,7 +25,7 @@ class RecipeController(private val engine: TemplateEngine) {
     @GetMapping("/recipes")
     @ResponseBody
     fun getRecipes(): String {
-        return recipes.values.joinToString("\n") { render("recipeEntry", mapOf("recipe" to it)) }
+        return recipes.values.sortedBy { it.title }.joinToString("\n") { render("recipeEntry", mapOf("recipe" to it)) }
     }
 
     @PostMapping("/recipes")
@@ -44,9 +44,7 @@ class RecipeController(private val engine: TemplateEngine) {
     }
 
     private fun render(
-        template: String,
-        params: Map<String, Any> = mapOf(),
-        output: TemplateOutput = StringOutput()
+        template: String, params: Map<String, Any> = mapOf(), output: TemplateOutput = StringOutput()
     ): String {
         engine.render("$template.kte", params, output)
         return output.toString()
@@ -56,6 +54,12 @@ class RecipeController(private val engine: TemplateEngine) {
     @ResponseBody
     fun modal(): String {
         return render("recipeAdd")
+    }
+
+    @GetMapping("/recipes/list")
+    @ResponseBody
+    fun list(): String {
+        return render("recipeList")
     }
 }
 

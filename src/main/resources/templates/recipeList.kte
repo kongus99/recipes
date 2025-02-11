@@ -1,0 +1,4 @@
+<div class="list-group" hx-swap-oob="true" hx-get="/recipes" hx-swap="innerHTML" hx-trigger="load" id="recipe-list">
+</div>
+<div id="recipe-summary" class="d-none" hx-swap-oob="true">
+</div>

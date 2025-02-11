@@ -4,24 +4,41 @@
 
 @param recipe : Recipe
 
-<div class="recipe-summary p-4 border rounded">
-    <h2 class="font-bold text-xl mb-4">${recipe.title}</h2>
+<%--<div class="recipe-summary p-4 border rounded">--%>
+<%--    <h2 class="font-bold text-xl mb-4">${recipe.title}</h2>--%>
 
-    <div class="recipe-content mb-4">
-        @if(recipe.content.type == ContentType.TEXT)
-            <p>${recipe.content.original}</p>
-        @else
-            <img src="data:${recipe.content.original};base64,${recipe.content.original}"
-                 alt="${recipe.title}"
-                 class="rounded-md shadow"/>
-        @endif
+<%--    <div class="recipe-content mb-4">--%>
+<%--        @if(recipe.content.type == ContentType.TEXT)--%>
+<%--            <p>${recipe.content.original}</p>--%>
+<%--        @else--%>
+<%--            <img src="data:${recipe.content.original};base64,${recipe.content.original}"--%>
+<%--                 alt="${recipe.title}"--%>
+<%--                 class="rounded-md shadow"/>--%>
+<%--        @endif--%>
+<%--    </div>--%>
+<%--    <button class="bg-blue-500 text-white py-2 px-4 rounded"--%>
+<%--            hx-get="/mainContainer"--%>
+<%--            hx-target="#main-container"--%>
+<%--            hx-swap="innerHtml"--%>
+<%--    >--%>
+<%--        Back--%>
+<%--    </button>--%>
+
+<%--</div>--%>
+
+<div class="card text-center" id="recipe-summary" hx-swap-oob="true">
+    <div class="card-header">
+        Featured
     </div>
-    <button class="bg-blue-500 text-white py-2 px-4 rounded"
-            hx-get="/mainContainer"
-            hx-target="#main-container"
-            hx-swap="innerHtml"
-    >
-        Back
-    </button>
+    <div class="card-body">
+        <h5 class="card-title">Special title treatment</h5>
+        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        <a href="#" class="btn btn-primary" hx-get="/recipes/list">Back</a>
+    </div>
+    <div class="card-footer text-body-secondary">
+        2 days ago
+    </div>
+</div>
 
+<div id="recipe-list" class="d-none" hx-swap-oob="true">
 </div>
