@@ -33,7 +33,7 @@ class RecipeController(private val engine: TemplateEngine) {
     fun create(@RequestParam("title") title: String, @RequestParam("file") file: MultipartFile?): String {
         val recipe = Recipe(title, fromMultipartFile(file))
         recipes[recipe.id] = recipe
-        return ""
+        return render("recipeEntry", mapOf("recipe" to recipe))
     }
 
     @GetMapping("/recipes/{id}")

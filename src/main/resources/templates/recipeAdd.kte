@@ -1,24 +1,26 @@
-<div class="modal-dialog modal-dialog-centered">
+<div
+        class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
         <div class="modal-header">
             <h5 class="modal-title" id="recipeModalLabel">Add Recipe</h5>
             <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
         </div>
-        <div class="modal-body">
-            <form>
+        <form hx-post="/recipes" enctype="multipart/form-data" hx-target="#recipe-list" hx-swap="afterbegin">
+            <div class="modal-body">
                 <div class="mb-3">
                     <label class="form-label" for="recipeName">Recipe Name</label>
-                    <input class="form-control" id="recipeName" placeholder="Enter recipe name" type="text">
+                    <input class="form-control" id="recipeName" name="title" placeholder="Enter recipe name" type="text"
+                           required>
                 </div>
                 <div class="mb-3">
                     <label class="form-label" for="recipeFile">Choose File</label>
-                    <input class="form-control" id="recipeFile" type="file">
+                    <input class="form-control" id="recipeFile" name="file" type="file">
                 </div>
-            </form>
-        </div>
-        <div class="modal-footer">
-            <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Close</button>
-            <button class="btn btn-primary" type="button">Save Recipe</button>
-        </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Close</button>
+                <button class="btn btn-primary" data-bs-dismiss="modal" type="submit">Save Recipe</button>
+            </div>
+        </form>
     </div>
 </div>
