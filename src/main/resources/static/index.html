@@ -15,7 +15,6 @@
 <div class="container my-5">
     <div class="text-center">
         <h1 class="fw-bold">Recipes</h1>
-        <p class="text-muted">A list of recipes</p>
     </div>
 
     <div class="row justify-content-center">
@@ -38,20 +37,7 @@
                 </div>
             </nav>
 
-
-            <ul class="list-group">
-                <li class="list-group-item text-center fw-bold py-3">
-                    <a class="text-decoration-none" href="#">Recipe 1</a>
-                </li>
-                <li class="list-group-item text-center fw-bold py-3">
-                    <a class="text-decoration-none" href="#">Recipe 2</a>
-                </li>
-                <li class="list-group-item text-center fw-bold py-3">
-                    <a class="text-decoration-none" href="#">Recipe 3</a>
-                </li>
-                <li class="list-group-item text-center fw-bold py-3">
-                    <a class="text-decoration-none" href="#">Recipe 4</a>
-                </li>
+            <ul class="list-group" id="recipe-list" hx-get="/recipes" hx-trigger="load" hx-swap="innerHTML">
             </ul>
         </div>
     </div>
@@ -70,7 +56,7 @@
                         <input class="form-control" id="recipeName" placeholder="Enter recipe name" type="text">
                     </div>
                     <div class="mb-3">
-                        <label class="form-label" for="recipeFile">Upload File</label>
+                        <label class="form-label" for="recipeFile">Choose File</label>
                         <input class="form-control" id="recipeFile" type="file">
                     </div>
                 </form>

@@ -1,7 +1,5 @@
 package com.recipes.controller
 
-import com.recipes.controller.RenderTarget.Adding
-import com.recipes.controller.RenderTarget.Default
 import com.recipes.model.Content
 import com.recipes.model.Content.Companion.fromMultipartFile
 import com.recipes.model.Recipe
@@ -24,18 +22,6 @@ class RecipeController(private val engine: TemplateEngine) {
         }
     }
 
-    @GetMapping("/mainContainer")
-    @ResponseBody
-    fun container(@RequestParam("render") render: RenderTarget?): String {
-        return when (render) {
-            Adding -> {
-                render("recipeAddForm")
-            }
-
-            else -> render("recipeList")
-        }
-    }
-
     @GetMapping("/recipes")
     @ResponseBody
     fun getRecipes(): String {
@@ -47,7 +33,7 @@ class RecipeController(private val engine: TemplateEngine) {
     fun create(@RequestParam("title") title: String, @RequestParam("file") file: MultipartFile?): String {
         val recipe = Recipe(title, fromMultipartFile(file))
         recipes[recipe.id] = recipe
-        return container(Default)
+        return ""
     }
 
     @GetMapping("/recipes/{id}")
@@ -68,7 +54,3 @@ class RecipeController(private val engine: TemplateEngine) {
 
 }
 
-enum class RenderTarget {
-    Default,
-    Adding
-}

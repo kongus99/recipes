@@ -2,7 +2,6 @@
 
 @param recipe: Recipe
 
-
-<li class="list-group-item d-flex justify-content-between align-items-center">
-    ${recipe.title}
+<li class="list-group-item text-center fw-bold py-3">
+    <a class="text-decoration-none" href="#">${recipe.title}</a>
 </li>
