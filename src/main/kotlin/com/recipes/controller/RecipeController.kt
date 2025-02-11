@@ -2,6 +2,7 @@ package com.recipes.controller
 
 import com.recipes.controller.RenderTarget.Adding
 import com.recipes.controller.RenderTarget.Default
+import com.recipes.model.Content
 import com.recipes.model.Content.Companion.fromMultipartFile
 import com.recipes.model.Recipe
 import gg.jte.TemplateEngine
@@ -16,11 +17,11 @@ import java.util.concurrent.ConcurrentHashMap
 @Controller
 class RecipeController(private val engine: TemplateEngine) {
 
-    private val recipes = ConcurrentHashMap<UUID, Recipe>()
-
-    @GetMapping("/")
-    fun home(): String {
-        return "redirect:/recipes.html"
+    private val recipes = ConcurrentHashMap<UUID, Recipe>().apply {
+        (1..10).forEach {
+            val recipe = Recipe("Recipe $it", Content())
+            this[recipe.id] = recipe
+        }
     }
 
     @GetMapping("/mainContainer")
