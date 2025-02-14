@@ -1,14 +1,15 @@
-# Base image with JDK 17syst
+FROM gradle:8.12.1-jdk17-alpine AS build
+COPY --chown=gradle:gradle . /home/gradle/src
+WORKDIR /home/gradle/src
+RUN gradle bootJar --no-daemon
+
 FROM openjdk:17-jdk-slim
 
-# Set the working directory inside the container
+RUN mkdir /app
 WORKDIR /app
 
-# Copy the application jar file to the container (adjust path if needed)
-COPY build/libs/recipes-0.0.1-SNAPSHOT.jar /app/recipes.jar
+COPY --from=build /home/gradle/src/build/libs/*.jar /app/recipes.jar
 
-# Expose the port on which your app runs (example: 8080)
 EXPOSE 8080
 
-# Default command to run the application
-CMD ["java", "-jar", "recipes.jar"]
+ENTRYPOINT ["java", "-jar", "recipes.jar"]
