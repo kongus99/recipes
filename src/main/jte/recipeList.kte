@@ -1,4 +1,16 @@
 <div class="list-group" hx-swap-oob="true" hx-get="/recipes" hx-swap="innerHTML" hx-trigger="load" id="recipe-list">
 </div>
+<div class="d-flex ms-auto" id="recipe-filter" hx-swap-oob="true">
+    <input
+            aria-label="Search"
+            class="form-control shadow-none"
+            hx-get="/recipes"
+            hx-target="#recipe-list"
+            hx-trigger="input changed delay:500ms, keyup[key=='Enter'], load"
+            name="nameFilter"
+            placeholder="Filter recipes"
+            type="search"
+    >
+</div>
 <div id="recipe-summary" class="d-none" hx-swap-oob="true">
 </div>

@@ -23,3 +23,6 @@
 
 <div id="recipe-list" class="d-none" hx-swap-oob="true">
 </div>
+
+<div id="recipe-filter" class="d-none" hx-swap-oob="true">
+</div>

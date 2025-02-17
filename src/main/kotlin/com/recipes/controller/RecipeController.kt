@@ -3,6 +3,7 @@ package com.recipes.controller
 import com.recipes.model.Content
 import com.recipes.model.Content.Companion.fromMultipartFile
 import com.recipes.model.Recipe
+import com.recipes.model.byName
 import gg.jte.TemplateEngine
 import gg.jte.TemplateOutput
 import gg.jte.output.StringOutput
@@ -24,8 +25,9 @@ class RecipeController(private val engine: TemplateEngine) {
 
     @GetMapping("/recipes")
     @ResponseBody
-    fun getRecipes(): String {
-        return recipes.values.sortedBy { it.title }.joinToString("\n") { render("recipeEntry", mapOf("recipe" to it)) }
+    fun getRecipes(@RequestParam("nameFilter") name: String?): String {
+        return recipes.values.filter { it.byName(name) }.sortedBy { it.title }
+            .joinToString("\n") { render("recipeEntry", mapOf("recipe" to it)) }
     }
 
     @PostMapping("/recipes")

@@ -1,6 +1,7 @@
 package com.recipes.model
 
 import com.recipes.model.ContentType.*
+import org.jetbrains.kotlin.util.capitalizeDecapitalize.toLowerCaseAsciiOnly
 import org.springframework.web.multipart.MultipartFile
 import java.util.*
 import java.util.UUID.randomUUID
@@ -10,6 +11,9 @@ data class Recipe(
     var content: Content,
     val id: UUID = randomUUID(),
 )
+
+fun Recipe.byName(name: String?): Boolean =
+    name.isNullOrBlank() || this.title.toLowerCaseAsciiOnly().contains(name.toLowerCaseAsciiOnly())
 
 data class Content(val original: String = "No content", val type: ContentType = TEXT) {
 

@@ -28,14 +28,18 @@
                     >+
                     </button>
 
-
-                    <form class="d-flex ms-auto" role="search">
+                    <div class="d-flex ms-auto" id="recipe-filter">
                         <input
                                 aria-label="Search"
                                 class="form-control shadow-none"
+                                hx-get="/recipes"
+                                hx-target="#recipe-list"
+                                hx-trigger="input changed delay:500ms, keyup[key=='Enter'], load"
+                                name="nameFilter"
                                 placeholder="Filter recipes"
-                                type="search">
-                    </form>
+                                type="search"
+                        >
+                    </div>
                 </div>
             </nav>
 
